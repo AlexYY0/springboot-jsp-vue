@@ -24,91 +24,138 @@
 </head>
 <body>
 <div id="appMain">
-    <%--<el-button type="primary">Click me!</el-button>
-    <el-button :plain="true" @click="open">Show message</el-button>
-    <el-button :plain="true" @click="openVn">VNode</el-button>--%>
-    <el-row class="tac">
-        <el-col :span="6">
-            <h5 class="mb-2">Default colors</h5>
-            <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    @open="handleOpen"
-                    @close="handleClose"
-            >
-                <el-sub-menu index="1">
-                    <template #title>
-                        <el-icon>
-                            <location/>
-                        </el-icon>
-                        <span>Navigator One</span>
-                    </template>
-                    <el-menu-item-group title="Group One">
-                        <el-menu-item index="1-1" @click="addTab(editableTabsValue)">item one</el-menu-item>
-                        <el-menu-item index="1-2" @click="addTab(editableTabsValue)">item two</el-menu-item>
-                    </el-menu-item-group>
-                    <el-menu-item-group title="Group Two">
-                        <el-menu-item index="1-3" @click="addTab(editableTabsValue)">item three</el-menu-item>
-                    </el-menu-item-group>
-                    <el-sub-menu index="1-4">
-                        <template #title>item four</template>
-                        <el-menu-item index="1-4-1">item one</el-menu-item>
-                    </el-sub-menu>
-                </el-sub-menu>
-                <el-menu-item index="2">
-                    <el-icon>
-                        <Clock/>
-                    </el-icon>
-                    <span>Navigator Two</span>
-                </el-menu-item>
-                <el-menu-item index="3" disabled>
-                    <el-icon>
-                        <document/>
-                    </el-icon>
-                    <span>Navigator Three</span>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <el-icon>
-                        <setting/>
-                    </el-icon>
-                    <span>Navigator Four</span>
-                </el-menu-item>
-            </el-menu>
-        </el-col>
-        <el-col :span="18">
-            <h5 class="mb-2">Custom colors</h5>
-            <el-tabs
-                    v-model="editableTabsValue"
-                    type="card"
-                    class="demo-tabs"
-                    closable
-                    @tab-remove="removeTab"
-            >
-                <el-tab-pane
-                        v-for="item in editableTabs"
-                        :key="item.name"
-                        :label="item.title"
-                        :name="item.name"
-                >
-                    {{ item.content }}
-                </el-tab-pane>
-            </el-tabs>
-        </el-col>
-    </el-row>
+    <div class="common-layout">
+        <el-container>
+            <el-header style="background-color: #4db3ff;display: flex;justify-content:space-between;align-items: center">
+                <div style="display: flex;justify-content:start;align-items: center">
+                    <div><img src="http://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e08da34488b114bd4c665ba2fa520a31.svg" alt="稀土掘金"/></div>
+                    <div>
+                        <el-divider direction="vertical"/>
+                    </div>
+                    <div><span>天地一体化网站</span></div>
+                </div>
+                <div style="display: flex;justify-content:end;align-items: center">
+                    <div><span>欢迎您，李涛（891234）！</span></div>
+                    <div>
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                                <div style="display: flex;align-items: center">
+                                    <div><el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/></div>
+                                    <div>
+                                        <el-icon class="el-icon--right">
+                                            <arrow-down/>
+                                        </el-icon>
+                                    </div>
+                                </div>
+                            </span>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item>Action 1</el-dropdown-item>
+                                    <el-dropdown-item>Action 2</el-dropdown-item>
+                                    <el-dropdown-item>Action 3</el-dropdown-item>
+                                    <el-dropdown-item disabled>Action 4</el-dropdown-item>
+                                    <el-dropdown-item divided>Action 5</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                    <div>
+                        <el-divider direction="vertical"/>
+                    </div>
+                    <div><img src="/api/image/AcademicCap.svg" alt="图标点击事件" style="height: 16px;width: 16px" @click="logout()"></div>
+                </div>
+            </el-header>
+            <el-container>
+                <el-aside width="180px">
+                    <el-menu
+                            default-active="2"
+                            class="el-menu-vertical-demo"
+                            @open="handleOpen"
+                            @close="handleClose"
+                    >
+                        <el-sub-menu index="1">
+                            <template #title>
+                                <el-icon>
+                                    <location/>
+                                </el-icon>
+                                <span>Navigator One</span>
+                            </template>
+                            <el-menu-item-group title="Group One-One">
+                                <el-menu-item index="1-1" @click="addTab('baidu','https://www.baidu.com/')">baidu
+                                </el-menu-item>
+                                <el-menu-item index="1-2" @click="addTab('bing','https://www.bing.com/')">bing
+                                </el-menu-item>
+                            </el-menu-item-group>
+                            <el-menu-item-group title="Group One-Two">
+                                <el-menu-item index="1-3" @click="addTab('google','https://www.google.com.hk/')">
+                                    google
+                                </el-menu-item>
+                            </el-menu-item-group>
+                            <el-sub-menu index="1-4">
+                                <template #title>item four</template>
+                                <el-menu-item index="1-4-1">item one</el-menu-item>
+                            </el-sub-menu>
+                        </el-sub-menu>
+                        <el-menu-item-group title="Group Two">
+                            <el-menu-item index="2" @click="addTab('bilibili','https://www.bilibili.com/')">
+                                <el-icon>
+                                    <Clock/>
+                                </el-icon>
+                                <span>bilibili</span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group title="Group Three">
+                            <el-menu-item index="3" disabled>
+                                <el-icon>
+                                    <document/>
+                                </el-icon>
+                                <span>Navigator Three</span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item index="4" @click="addTab('youku','https://www.youku.com/')">
+                            <el-icon>
+                                <setting/>
+                            </el-icon>
+                            <span>youku</span>
+                        </el-menu-item>
+                    </el-menu>
+                </el-aside>
+                <el-container>
+                    <el-main>
+                        <el-tabs
+                                v-model="editableTabsValue"
+                                type="card"
+                                class="demo-tabs"
+                                @tab-remove="removeTab"
+                        >
+                            <el-tab-pane
+                                    v-for="item in editableTabs"
+                                    :closable="item.name === '首页' ? false : true"
+                                    :key="item.name"
+                                    :label="item.title"
+                                    :name="item.name"
+                            >
+                                <iframe
+                                        :src="item.url"
+                                        width="100%"
+                                        height="100%"
+                                >
+                                </iframe>
+                            </el-tab-pane>
+                        </el-tabs>
+                    </el-main>
+                    <el-footer>Footer</el-footer>
+                </el-container>
+            </el-container>
+        </el-container>
+    </div>
 </div>
 
+<!-- 引入水印生成js -->
+<script type="text/javascript" src="/api/static/lib/watermark.js"></script>
 <%--<script type="text/javascript">--%>
 <script type="text/babel">
     //注意：这时type不能为text/javascript了，要改为text/babel,解析babel文件（本地引入browser.js和polyfill.js后script标签的type要改为type=text/babel，用cdn方式引入是不需要修改的。）
-    //es6 demo
-    const openVnDemo = () => {
-        ElementPlus.ElMessage({
-            message: Vue.h('p', null, [
-                Vue.h('span', null, 'Message can be '),
-                Vue.h('i', {style: 'color: teal'}, 'VNode'),
-            ]),
-        })
-    }
 
     const handleOpen = (key: string, keyPath: string[]) => {
         console.log(key, keyPath)
@@ -117,24 +164,22 @@
         console.log(key, keyPath)
     }
 
-    /*let tabIndex = 2
-    const editableTabsValue = Vue.ref('2')
-    const editableTabs = Vue.ref([
-        {
-            title: 'Tab 1',
-            name: '1',
-            content: 'Tab 1 content',
-        },
-        {
-            title: 'Tab 2',
-            name: '2',
-            content: 'Tab 2 content',
-        },
-    ])*/
-
     //app实例可以作为一个全局变量或者局部变量被外部页面使用
-    /*const { createApp, h } = Vue;
+    const {createApp, h, ref} = Vue;
     const app = createApp({
+        data() {
+            return {
+                message: "Hello Element Plus",
+                editableTabsValue: ref('首页'),
+                editableTabs: ref([
+                    {
+                        title: '首页',
+                        name: '首页',
+                        url: 'https://www.baidu.com/',
+                    },
+                ])
+            };
+        },
         methods: {
             open() {
                 ElementPlus.ElMessage('This is a message.');
@@ -143,14 +188,82 @@
                 ElementPlus.ElMessage({
                     message: h('p', null, [
                         h('span', null, 'Message can be '),
-                        h('i', { style: 'color: teal' }, 'VNode'),
+                        h('i', {style: 'color: teal'}, 'VNode'),
                     ]),
                 });
             },
+            handleOpen(key, keyPath) {
+                handleOpen(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                handleClose(key, keyPath);
+            },
+            addTab(tabName, url) {
+                const tabs = this.editableTabs
+                // 判断当前标签页数组中是否存在当前选中的标签，根据标签名匹配
+                let tab = tabs.filter((item) => item.name === tabName)[0];
+                if (!tab) {
+                    this.editableTabs.push({
+                        title: tabName,
+                        name: tabName,
+                        url: url,
+                    })
+                }
+                this.editableTabsValue = tabName
+            },
+            removeTab(targetName) {
+                const tabs = this.editableTabs
+                let activeName = this.editableTabsValue
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            const nextTab = tabs[index + 1] || tabs[index - 1]
+                            if (nextTab) {
+                                activeName = nextTab.name
+                            }
+                        }
+                    })
+                }
+                this.editableTabsValue = activeName
+                this.editableTabs = tabs.filter((tab) => tab.name !== targetName)
+            },
+            logout() {
+                ElementPlus.ElMessageBox.confirm(
+                    '是否确定退出?',
+                    'Warning',
+                    {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning',
+                    }
+                )
+                    .then(() => {
+                        ElementPlus.ElMessage({
+                            type: 'success',
+                            message: '成功点击了确定按钮',
+                        })
+                    })
+                    .catch(() => {
+                        ElementPlus.ElMessage({
+                            type: 'info',
+                            message: '成功点击了取消按钮',
+                        })
+                    })
+            },
         },
-    }).use(ElementPlus).mount('#appMain');*/
+    });
+    //注册Element Plus UI插件
+    app.use(ElementPlus);
+    //注册Element Plus Icon组件
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        app.component(key, component)
+    }
+    app.mount("#appMain");
 
-    const App = {
+    // createWaterMark("我是水印");
+    useWatermark().setWatermark("我是水印");
+
+    /*const App = {
         data() {
             return {
                 message: "Hello Element Plus",
@@ -209,7 +322,7 @@
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
         app.component(key, component)
     }
-    app.mount("#appMain");
+    app.mount("#appMain");*/
 
     /*const {createApp} = Vue
     createApp({
@@ -244,5 +357,7 @@
         }
     });*/
 </script>
+<style>
+</style>
 </body>
 </html>
