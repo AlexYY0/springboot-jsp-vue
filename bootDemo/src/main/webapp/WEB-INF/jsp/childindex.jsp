@@ -40,7 +40,36 @@
     //app实例可以作为一个全局变量或者局部变量被外部页面使用
     const {createApp, h, ref} = Vue;
     const appChild = createApp({
-        data() {
+        setup() {
+            console.log('setup!');
+
+            const message = ref('Hello, Vue 3!');
+            const active = ref(0);
+
+            Vue.watch(message, (newVal, oldVal) => {
+                console.log('Message changed:', newVal, oldVal);
+            });
+
+            const next = () =>{
+                message.value = "100";
+
+                var parentVue = window.parent.app;
+                console.log('parentVue',parentVue)
+                // 获取父容器的 Vue 实例
+                var parentInstance = window.parent.appInstance;
+                console.log('parentInstance', parentInstance);
+                // 调用父容器 Vue 实例的方法
+                //parentInstance.parentMethod();
+                //菜单跳转
+                parentInstance.addTab('bilibili', 'https://www.bilibili.com/','2');
+                if (active.value++ > 2) active.value = 0;
+            }
+
+            return {
+                next
+            };
+        },
+        /*data() {
             return {
                 message: "Hello Element Plus",
                 active: ref(0),
@@ -54,12 +83,12 @@
                 var parentInstance = window.parent.appInstance;
                 console.log('parentInstance', parentInstance);
                 // 调用父容器 Vue 实例的方法
-                parentInstance.parentMethod();
+                //parentInstance.parentMethod();
                 //菜单跳转
-                parentInstance.addTab('bilibili', 'https://www.bilibili.com/');
+                parentInstance.addTab('bilibili', 'https://www.bilibili.com/','2');
                 if (this.active++ > 2) this.active = 0
             }
-        },
+        },*/
     });
     //注册Element Plus UI插件
     appChild.use(ElementPlus);
@@ -67,7 +96,10 @@
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
         appChild.component(key, component)
     }
-    appChild.mount("#appChildMain");
+    var appChildMainInstance = appChild.mount("#appChildMain");
+
+    /*console.log('appChildMainVue',appChild)
+    console.log('appChildMainInstance',appChildMainInstance)*/
 </script>
 </body>
 </html>

@@ -68,7 +68,7 @@
             <el-container>
                 <el-aside width="180px">
                     <el-menu
-                            default-active="2"
+                            :default-active="menuActiveIndex"
                             class="el-menu-vertical-demo"
                             @open="handleOpen"
                             @close="handleClose"
@@ -81,13 +81,13 @@
                                 <span>Navigator One</span>
                             </template>
                             <el-menu-item-group title="Group One-One">
-                                <el-menu-item index="1-1" @click="addTab('baidu','https://www.baidu.com/')">baidu
+                                <el-menu-item index="1-1" @click="addTab('baidu','https://www.baidu.com/','1-1')">baidu
                                 </el-menu-item>
-                                <el-menu-item index="1-2" @click="addTab('bing','https://www.bing.com/')">bing
+                                <el-menu-item index="1-2" @click="addTab('bing','https://www.bing.com/','1-2')">bing
                                 </el-menu-item>
                             </el-menu-item-group>
                             <el-menu-item-group title="Group One-Two">
-                                <el-menu-item index="1-3" @click="addTab('google','https://www.google.com.hk/')">
+                                <el-menu-item index="1-3" @click="addTab('google','https://www.google.com.hk/','1-3')">
                                     google
                                 </el-menu-item>
                             </el-menu-item-group>
@@ -97,7 +97,7 @@
                             </el-sub-menu>
                         </el-sub-menu>
                         <el-menu-item-group title="Group Two">
-                            <el-menu-item index="2" @click="addTab('bilibili','https://www.bilibili.com/')">
+                            <el-menu-item index="2" @click="addTab('bilibili','https://www.bilibili.com/','2')">
                                 <el-icon>
                                     <Clock/>
                                 </el-icon>
@@ -112,13 +112,13 @@
                                 <span>Navigator Three</span>
                             </el-menu-item>
                         </el-menu-item-group>
-                        <el-menu-item index="4" @click="addTab('youku','https://www.youku.com/')">
+                        <el-menu-item index="4" @click="addTab('youku','https://www.youku.com/','4')">
                             <el-icon>
                                 <setting/>
                             </el-icon>
                             <span>youku</span>
                         </el-menu-item>
-                        <el-menu-item index="5" @click="addTab('childPage','http://localhost:8081/api/childPage')">
+                        <el-menu-item index="5" @click="addTab('childPage','http://localhost:8081/api/childPage','5')">
                             <el-icon>
                                 <setting/>
                             </el-icon>
@@ -176,6 +176,7 @@
         data() {
             return {
                 message: "Hello Element Plus",
+                menuActiveIndex: 1,
                 editableTabsValue: ref('首页'),
                 editableTabs: ref([
                     {
@@ -205,8 +206,10 @@
             handleClose(key, keyPath) {
                 handleClose(key, keyPath);
             },
-            addTab(tabName, url) {
+            addTab(tabName, url, index) {
                 console.log('parentThis: ', this);
+                //菜单选中
+                this.refreshMenuActive(index);
                 const tabs = this.editableTabs
                 // 判断当前标签页数组中是否存在当前选中的标签，根据标签名匹配
                 let tab = tabs.filter((item) => item.name === tabName)[0];
@@ -258,9 +261,17 @@
                         })
                     })
             },
+            refreshMenuActive(activeIndex) {
+                this.menuActiveIndex = activeIndex;
+            },
             parentMethod() {
                 console.log("父容器的parentMethod方法被调用了！");
             },
+        },
+        mounted() {
+            /*Vue.watch(this.menuActiveIndex, (newVal, oldVal) => {
+                console.log('Message changed:', newVal, oldVal);
+            });*/
         },
     });
     //注册Element Plus UI插件
