@@ -40,6 +40,11 @@ public class FileController {
         System.out.println("redirect to home page!");
         return "index";
     }
+    @RequestMapping(value = "/childPage")
+    public String childPage() {
+        System.out.println("redirect to child page!");
+        return "childindex";
+    }
 
 
     @RequestMapping(value = "/home/page")

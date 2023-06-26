@@ -36,8 +36,6 @@ const domSymbol = Symbol('watermark-dom')
 function useWatermark(appendEl) {
     let func = () => {}
     if (!appendEl) {
-        console.log(123);
-        console.log(appendEl);
         appendEl = document.body;
     }
     const id = domSymbol.toString();

@@ -118,6 +118,12 @@
                             </el-icon>
                             <span>youku</span>
                         </el-menu-item>
+                        <el-menu-item index="5" @click="addTab('childPage','http://localhost:8081/api/childPage')">
+                            <el-icon>
+                                <setting/>
+                            </el-icon>
+                            <span>childPage</span>
+                        </el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-container>
@@ -175,7 +181,7 @@
                     {
                         title: '首页',
                         name: '首页',
-                        url: 'https://www.baidu.com/',
+                        url: 'https://www.bing.com/',
                     },
                 ])
             };
@@ -193,12 +199,14 @@
                 });
             },
             handleOpen(key, keyPath) {
+                //console.log(this);
                 handleOpen(key, keyPath);
             },
             handleClose(key, keyPath) {
                 handleClose(key, keyPath);
             },
             addTab(tabName, url) {
+                console.log('parentThis: ', this);
                 const tabs = this.editableTabs
                 // 判断当前标签页数组中是否存在当前选中的标签，根据标签名匹配
                 let tab = tabs.filter((item) => item.name === tabName)[0];
@@ -250,6 +258,9 @@
                         })
                     })
             },
+            parentMethod() {
+                console.log("父容器的parentMethod方法被调用了！");
+            },
         },
     });
     //注册Element Plus UI插件
@@ -258,10 +269,17 @@
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
         app.component(key, component)
     }
-    app.mount("#appMain");
+    const appInstance = app.mount("#appMain");
 
     // createWaterMark("我是水印");
     useWatermark().setWatermark("我是水印");
+
+    /*console.log('app',app);
+    console.log('appInstance', appInstance);
+    console.log('appInstance.message', appInstance.message);
+    console.log('appInstance.$data.message', appInstance.$data.message);
+    app._component.methods.parentMethod();
+    appInstance.parentMethod();*/
 
     /*const App = {
         data() {
@@ -357,7 +375,5 @@
         }
     });*/
 </script>
-<style>
-</style>
 </body>
 </html>
