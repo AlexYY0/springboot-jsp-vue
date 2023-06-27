@@ -66,9 +66,10 @@
                 </div>
             </el-header>
             <el-container>
-                <el-aside width="180px">
+                <el-aside style="width: 180px;height: calc(100vh - 76px)">
                     <el-menu
                             :default-active="menuActiveIndex"
+                            :collapse="false"
                             class="el-menu-vertical-demo"
                             @open="handleOpen"
                             @close="handleClose"
@@ -124,6 +125,27 @@
                             </el-icon>
                             <span>childPage</span>
                         </el-menu-item>
+                        <el-menu-item-group>
+                            <template #title><span>Group One</span></template>
+                            <el-sub-menu index="11">
+                                <template #title>
+                                    <el-icon><location /></el-icon>
+                                    <span>Navigator One</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <template #title><span>Group One</span></template>
+                                    <el-menu-item index="1-11">item one</el-menu-item>
+                                    <el-menu-item index="1-21">item two</el-menu-item>
+                                </el-menu-item-group>
+                                <el-menu-item-group title="Group Two">
+                                    <el-menu-item index="1-31">item three</el-menu-item>
+                                </el-menu-item-group>
+                                <el-sub-menu index="1-41">
+                                    <template #title><span>item four</span></template>
+                                    <el-menu-item index="1-4-11">item one</el-menu-item>
+                                </el-sub-menu>
+                            </el-sub-menu>
+                        </el-menu-item-group>
                     </el-menu>
                 </el-aside>
                 <el-container>
@@ -133,6 +155,8 @@
                                 type="card"
                                 class="demo-tabs"
                                 @tab-remove="removeTab"
+                                @tab-click="tabClick"
+                                style="height: calc(100vh - 116px)"
                         >
                             <el-tab-pane
                                     v-for="item in editableTabs"
@@ -143,14 +167,13 @@
                             >
                                 <iframe
                                         :src="item.url"
-                                        width="100%"
-                                        height="100%"
+                                        style="width: 100%;height: calc(100vh - 156px)"
                                 >
                                 </iframe>
                             </el-tab-pane>
                         </el-tabs>
                     </el-main>
-                    <el-footer>Footer</el-footer>
+<%--                    <el-footer>Footer</el-footer>--%>
                 </el-container>
             </el-container>
         </el-container>
@@ -176,13 +199,14 @@
         data() {
             return {
                 message: "Hello Element Plus",
-                menuActiveIndex: 1,
+                menuActiveIndex: '1-2',
                 editableTabsValue: ref('首页'),
                 editableTabs: ref([
                     {
                         title: '首页',
                         name: '首页',
                         url: 'https://www.bing.com/',
+                        menuIndex: '1-2',
                     },
                 ])
             };
@@ -208,8 +232,6 @@
             },
             addTab(tabName, url, index) {
                 console.log('parentThis: ', this);
-                //菜单选中
-                this.refreshMenuActive(index);
                 const tabs = this.editableTabs
                 // 判断当前标签页数组中是否存在当前选中的标签，根据标签名匹配
                 let tab = tabs.filter((item) => item.name === tabName)[0];
@@ -218,9 +240,12 @@
                         title: tabName,
                         name: tabName,
                         url: url,
+                        menuIndex: index,
                     })
                 }
                 this.editableTabsValue = tabName
+                //菜单选中
+                this.refreshMenuActive(index);
             },
             removeTab(targetName) {
                 const tabs = this.editableTabs
@@ -231,12 +256,21 @@
                             const nextTab = tabs[index + 1] || tabs[index - 1]
                             if (nextTab) {
                                 activeName = nextTab.name
+                                //菜单选中
+                                this.refreshMenuActive(nextTab.menuIndex);
                             }
                         }
                     })
                 }
                 this.editableTabsValue = activeName
                 this.editableTabs = tabs.filter((tab) => tab.name !== targetName)
+            },
+            tabClick(tabsPaneContext, event) {
+                //console.log('tabsPaneContext', tabsPaneContext, 'event', event);
+                const tabs = this.editableTabs
+                let tab = tabs.filter((item) => item.name === tabsPaneContext.paneName)[0];
+                //菜单选中
+                this.refreshMenuActive(tab.menuIndex);
             },
             logout() {
                 ElementPlus.ElMessageBox.confirm(
@@ -386,5 +420,17 @@
         }
     });*/
 </script>
+<style>
+    .el-menu--collapse>.el-menu-item-group>ul>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item-group>ul>.el-menu-item>span, .el-menu--collapse>.el-menu-item>span, .el-menu--collapse>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item-group>.el-menu-item-group__title {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        display: inline-block;
+    }
+    /*::-webkit-scrollbar {
+        display: none; !* Chrome Safari *!
+    }*/
+</style>
 </body>
 </html>
