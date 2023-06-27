@@ -66,87 +66,92 @@
                 </div>
             </el-header>
             <el-container>
-                <el-aside style="width: 180px;height: calc(100vh - 76px)">
-                    <el-menu
-                            :default-active="menuActiveIndex"
-                            :collapse="false"
-                            class="el-menu-vertical-demo"
-                            @open="handleOpen"
-                            @close="handleClose"
-                    >
-                        <el-sub-menu index="1">
-                            <template #title>
-                                <el-icon>
-                                    <location/>
-                                </el-icon>
-                                <span>Navigator One</span>
-                            </template>
-                            <el-menu-item-group title="Group One-One">
-                                <el-menu-item index="1-1" @click="addTab('baidu','https://www.baidu.com/','1-1')">baidu
+                <el-aside :width="isMenuCollapse?'64px':'180px'">
+                    <div class="aside-wrap">
+                        <div class="menu-wrap">
+                            <el-menu
+                                    :default-active="menuActiveIndex"
+                                    :collapse="isMenuCollapse"
+                                    class="el-menu-vertical-demo"
+                                    @open="handleOpen"
+                                    @close="handleClose"
+                            >
+                                <el-sub-menu index="1">
+                                    <template #title>
+                                        <el-icon>
+                                            <location/>
+                                        </el-icon>
+                                        <span>Navigator One</span>
+                                    </template>
+                                    <el-menu-item-group title="Group One-One">
+                                        <el-menu-item index="1-1" @click="addTab('baidu','https://www.baidu.com/','1-1')">baidu
+                                        </el-menu-item>
+                                        <el-menu-item index="1-2" @click="addTab('bing','https://www.bing.com/','1-2')">bing
+                                        </el-menu-item>
+                                    </el-menu-item-group>
+                                    <el-menu-item-group title="Group One-Two">
+                                        <el-menu-item index="1-3" @click="addTab('google','https://www.google.com.hk/','1-3')">
+                                            google
+                                        </el-menu-item>
+                                    </el-menu-item-group>
+                                    <el-sub-menu index="1-4">
+                                        <template #title>item four</template>
+                                        <el-menu-item index="1-4-1">item one</el-menu-item>
+                                    </el-sub-menu>
+                                </el-sub-menu>
+                                <el-menu-item-group title="Group Two">
+                                    <el-menu-item index="2" @click="addTab('bilibili','https://www.bilibili.com/','2')">
+                                        <el-icon>
+                                            <Clock/>
+                                        </el-icon>
+                                        <span>bilibili</span>
+                                    </el-menu-item>
+                                </el-menu-item-group>
+                                <el-menu-item-group title="Group Three">
+                                    <el-menu-item index="3" disabled>
+                                        <el-icon>
+                                            <document/>
+                                        </el-icon>
+                                        <span>Navigator Three</span>
+                                    </el-menu-item>
+                                </el-menu-item-group>
+                                <el-menu-item index="4" @click="addTab('youku','https://www.youku.com/','4')">
+                                    <el-icon>
+                                        <setting/>
+                                    </el-icon>
+                                    <span>youku</span>
                                 </el-menu-item>
-                                <el-menu-item index="1-2" @click="addTab('bing','https://www.bing.com/','1-2')">bing
+                                <el-menu-item index="5" @click="addTab('childPage','http://localhost:8081/api/childPage','5')">
+                                    <el-icon>
+                                        <setting/>
+                                    </el-icon>
+                                    <span>childPage</span>
                                 </el-menu-item>
-                            </el-menu-item-group>
-                            <el-menu-item-group title="Group One-Two">
-                                <el-menu-item index="1-3" @click="addTab('google','https://www.google.com.hk/','1-3')">
-                                    google
-                                </el-menu-item>
-                            </el-menu-item-group>
-                            <el-sub-menu index="1-4">
-                                <template #title>item four</template>
-                                <el-menu-item index="1-4-1">item one</el-menu-item>
-                            </el-sub-menu>
-                        </el-sub-menu>
-                        <el-menu-item-group title="Group Two">
-                            <el-menu-item index="2" @click="addTab('bilibili','https://www.bilibili.com/','2')">
-                                <el-icon>
-                                    <Clock/>
-                                </el-icon>
-                                <span>bilibili</span>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="Group Three">
-                            <el-menu-item index="3" disabled>
-                                <el-icon>
-                                    <document/>
-                                </el-icon>
-                                <span>Navigator Three</span>
-                            </el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item index="4" @click="addTab('youku','https://www.youku.com/','4')">
-                            <el-icon>
-                                <setting/>
-                            </el-icon>
-                            <span>youku</span>
-                        </el-menu-item>
-                        <el-menu-item index="5" @click="addTab('childPage','http://localhost:8081/api/childPage','5')">
-                            <el-icon>
-                                <setting/>
-                            </el-icon>
-                            <span>childPage</span>
-                        </el-menu-item>
-                        <el-menu-item-group>
-                            <template #title><span>Group One</span></template>
-                            <el-sub-menu index="11">
-                                <template #title>
-                                    <el-icon><location /></el-icon>
-                                    <span>Navigator One</span>
-                                </template>
                                 <el-menu-item-group>
                                     <template #title><span>Group One</span></template>
-                                    <el-menu-item index="1-11">item one</el-menu-item>
-                                    <el-menu-item index="1-21">item two</el-menu-item>
+                                    <el-sub-menu index="11">
+                                        <template #title>
+                                            <el-icon><location /></el-icon>
+                                            <span>Navigator One</span>
+                                        </template>
+                                        <el-menu-item-group>
+                                            <template #title><span>Group One</span></template>
+                                            <el-menu-item index="1-11">item one</el-menu-item>
+                                            <el-menu-item index="1-21">item two</el-menu-item>
+                                        </el-menu-item-group>
+                                        <el-menu-item-group title="Group Two">
+                                            <el-menu-item index="1-31">item three</el-menu-item>
+                                        </el-menu-item-group>
+                                        <el-sub-menu index="1-41">
+                                            <template #title><span>item four</span></template>
+                                            <el-menu-item index="1-4-11">item one</el-menu-item>
+                                        </el-sub-menu>
+                                    </el-sub-menu>
                                 </el-menu-item-group>
-                                <el-menu-item-group title="Group Two">
-                                    <el-menu-item index="1-31">item three</el-menu-item>
-                                </el-menu-item-group>
-                                <el-sub-menu index="1-41">
-                                    <template #title><span>item four</span></template>
-                                    <el-menu-item index="1-4-11">item one</el-menu-item>
-                                </el-sub-menu>
-                            </el-sub-menu>
-                        </el-menu-item-group>
-                    </el-menu>
+                            </el-menu>
+                        </div>
+                        <div class="collapse-button" @click="isMenuCollapse = !isMenuCollapse"><span>收起</span></div>
+                    </div>
                 </el-aside>
                 <el-container>
                     <el-main>
@@ -200,6 +205,7 @@
             return {
                 message: "Hello Element Plus",
                 menuActiveIndex: '1-2',
+                isMenuCollapse: false,
                 editableTabsValue: ref('首页'),
                 editableTabs: ref([
                     {
@@ -428,9 +434,33 @@
         visibility: hidden;
         display: inline-block;
     }
-    /*::-webkit-scrollbar {
-        display: none; !* Chrome Safari *!
-    }*/
+
+    aside {
+        /*height: calc(100vh - 76px);*/
+    }
+
+    .aside-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .menu-wrap {
+        height: calc(100vh - 116px);
+        scrollbar-width: none; /* firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .menu-wrap::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+    }
+
+    .collapse-button {
+        background-color: pink;
+        height: 40px;
+    }
 </style>
 </body>
 </html>
