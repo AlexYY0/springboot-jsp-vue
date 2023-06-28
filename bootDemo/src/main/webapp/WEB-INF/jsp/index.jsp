@@ -427,9 +427,10 @@
     });*/
 </script>
 <style>
-    .el-menu--collapse>.el-menu-item-group>ul>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item-group>ul>.el-menu-item>span, .el-menu--collapse>.el-menu-item>span, .el-menu--collapse>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item-group>.el-menu-item-group__title {
+    .el-menu--collapse>.el-menu-item-group>ul>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item>span, .el-menu--collapse>.el-sub-menu>.el-sub-menu__title>span, .el-menu--collapse>.el-menu-item-group>ul>.el-menu-item>span, .el-menu--collapse>.el-menu-item-group>.el-menu-item-group__title, .el-menu--collapse>.el-menu-item-group>.el-menu-item-group__title>span {
         height: 0;
         width: 0;
+        padding: 0;
         overflow: hidden;
         visibility: hidden;
         display: inline-block;
@@ -460,6 +461,8 @@
     .collapse-button {
         background-color: pink;
         height: 40px;
+        line-height: 40px;
+        text-align: center;
     }
 </style>
 </body>
