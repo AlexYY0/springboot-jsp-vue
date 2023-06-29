@@ -1,5 +1,6 @@
 package com.example.demo.test;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.util.Constants;
 import com.example.demo.util.FTPUtil;
 import com.example.demo.util.Result;
@@ -41,7 +42,15 @@ public class FileController {
         return "index";
     }
     @RequestMapping(value = "/childPage")
-    public String childPage() {
+    public String childPage(Model model) {
+        Map<String, String> testMap = new HashMap<String, String>();
+        testMap.put("01", "test01");
+        testMap.put("02", "test02");
+        model.addAttribute("testMap", testMap);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("01", "test01");
+        jsonObject.put("02", "test02");
+        model.addAttribute("testJson", jsonObject);
         System.out.println("redirect to child page!");
         return "childindex";
     }

@@ -37,6 +37,13 @@
 <script type="text/babel">
     //注意：这时type不能为text/javascript了，要改为text/babel,解析babel文件（本地引入browser.js和polyfill.js后script标签的type要改为type=text/babel，用cdn方式引入是不需要修改的。）
 
+    let keyName = '01';
+    console.log('testJson','${testJson}');
+    var testJsonObj = JSON.parse('${testJson}');
+    console.log('testJsonObj', testJsonObj);
+    let mapValue = testJsonObj[keyName];
+    console.log('mapValue', mapValue);
+
     //app实例可以作为一个全局变量或者局部变量被外部页面使用
     const {createApp, h, ref} = Vue;
     const appChild = createApp({
